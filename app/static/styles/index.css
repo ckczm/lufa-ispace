@@ -4,6 +4,11 @@
     color: white;
 }
 
+.fa-times {
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
 .header {
     padding: 0.35em;
 }
@@ -20,9 +25,9 @@ body {
     background-size: cover;
 }
 
-#flight_list_table tbody tr {
+/* #flight_list_table tbody tr {
     cursor: pointer;
-}
+} */
 
 .modal-header {
     display: block;

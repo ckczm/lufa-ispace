@@ -1,13 +1,36 @@
 $(function () {
     $('#create_flight_button').click(function(event){
         event.preventDefault();
-        console.log('elo');
-        var flight_no_input = document.getElementById('flight-no-input').value;
-        var url = '/get_flight/' + flight_no_input;
+        var airline = document.getElementById('airline_input').value;
+        var flight_no = document.getElementById('flight-no-input').value;
+        var departure = document.getElementById('departure_input').value;
+        var destination = document.getElementById('destination_input').value;
+        var registration = document.getElementById('registration_input').value;
+
+        var url = '/get_flight/' + flight_no;
         $.getJSON(url, function(data){
-            console.log(data);
             if(data == null){
-                document.getElementById('create_flight_form').submit();
+                if(airline !== '' && departure !== '' && destination !== '' && registration !== ''){
+                    document.getElementById('create_flight_form').submit();
+                }
+                else{
+                    $("#response").animate({
+                        height: '+=72px'
+                    }, 300);
+                    $('<div class="alert alert-danger">' +
+                        '<button type="button" class="close" data-dismiss="alert">' +
+                        '&times;</button>Enter all data!</div>').hide().appendTo('#response').fadeIn(1000);
+    
+                    $(".alert").delay(3000).fadeOut(
+                        "normal",
+                        function(){
+                            $(this).remove();
+                    });
+    
+                    $("#response").delay(4000).animate({
+                        height: '-=72px'
+                    }, 300);
+                }
             }
             else{
                 $("#response").animate({
