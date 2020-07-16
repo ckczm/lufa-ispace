@@ -1,0 +1,127 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    background-color: grey;
+    background-image: url("../images/lufthansa-space.jpg");
+    background-size: cover;
+    align-items: center;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-bottom: 40px;
+}
+
+.text-center {
+    text-align: center !important;
+    color: white;
+}
+
+.checkbox-text {
+    color: white;
+}
+
+.form-login, .form-signup {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-login input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-login, .form-signup, .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.font-weight-normal {
+    font-weight: 400 !important;
+}
+
+.text-muted {
+    color: white !important;
+}
+
+.mb-3, .my-3 {
+    margin-bottom: 1rem !important;
+}
+
+.mt-5, .my-5 {
+    margin-top: 3rem !important;
+}
+
+/* Navbar section */
+
+.nav {
+    width: 100%;
+    height: 65px;
+    position: fixed;
+    line-height: 65px;
+    text-align: center;
+}
+
+.nav div.main_list {
+    height: 65px;
+    float: right;
+}
+
+.nav div.main_list ul {
+    width: 100%;
+    height: 65px;
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav div.main_list ul li {
+    width: auto;
+    height: 65px;
+    padding: 0;
+    padding-right: 3rem;
+}
+
+.nav div.main_list ul li a {
+    text-decoration: none;
+    color: #fff;
+    line-height: 65px;
+    font-size: 1.8rem;
+}
+
+.nav div.main_list ul li a:hover {
+    color: rgb(2, 134, 223);
+}
+
+.nav {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 130px;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+/* Remove color effect filter on autofilled fields */
+input {
+    filter: none;
+}
