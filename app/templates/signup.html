@@ -1,0 +1,47 @@
+{% extends "bootstrap/base.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/login.css')}}">
+{% endblock %}
+
+{% block title %}Digital Gold - Signup{% endblock %}
+
+{% block navbar %}
+<nav class="nav navbar-fixed-top justify-content-end">
+    <div class="container">
+        <div id="mainListDiv" class="main_list">
+            <ul class="navlinks">
+                <li class="nav-item"><a href="{{url_for('auth.login_page')}}">Login</a></li>
+                <li class="nav-item"><a href="{{url_for('auth.signup_page')}}">Signup</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<form class="form-signup" method="POST" action="{{url_for('auth.signup_post')}}">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            {{ messages[0] }}. Go to <a href="{{ url_for('auth.login_page') }}" class="alert_link">login page</a>.
+        </div>
+    {% endif %}
+    {% endwith %}
+
+    <h1 class="h3 mb-3 font-weight-normal text-center">Sign Up</h1>
+
+    <label class="sr-only" for="input_email">Email address</label>
+    <input id="input_email" class="form-control" type="email" name="email" placeholder="Email address" required="" autofocus="">
+
+    <label class="sr-only" for="input_name">Name</label>
+    <input id="input_name" class="form-control" type="name" name="name" placeholder="Name" required="" autofocus="">
+
+    <label class="sr-only" for="input_password">Password</label>
+    <input id="input_password" class="form-control" type="password" name="password" placeholder="Password" required="">
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+    <p class="mt-5 mb-3 text-muted text-center">© Digital Gold 2020</p>
+</form>
+{% endblock %}
