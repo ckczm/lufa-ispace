@@ -1,0 +1,29 @@
+/* custom styling for specific icons */
+.fa-sign-out-alt {
+    font-size: 2em;
+    color: white;
+}
+
+.header {
+    padding: 0.35em;
+}
+
+.brand {
+    display: inline-block;
+    color: white;
+    height: 30px;
+    width: 30px;
+}
+
+body {
+    background-image: url("../images/space-background.jpg");
+    background-size: cover;
+}
+
+#flight_list_table tbody tr {
+    cursor: pointer;
+}
+
+.modal-header {
+    display: block;
+}

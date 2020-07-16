@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="Ebene_1"
+   data-name="Ebene 1"
+   viewBox="0 0 1223.41 1223.4101"
+   version="1.1"
+   sodipodi:docname="myk.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   width="1223.41"
+   height="1223.41">
+  <metadata
+     id="metadata3752">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>lh_lufthansa_systems_1lin_white_RGB</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     id="namedview3750"
+     showgrid="false"
+     inkscape:zoom="0.22584115"
+     inkscape:cx="1818.3689"
+     inkscape:cy="810.88766"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Ebene_1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs3743">
+    <style
+       id="style3741">.cls-1{fill:#fff;}</style>
+  </defs>
+  <title
+     id="title3745">lh_lufthansa_systems_1lin_white_RGB</title>
+  <path
+     class="cls-1"
+     d="M 611.71,0 C 273.44,0 0,273.43 0,611.71 c 0,338.28 273.44,611.7 611.71,611.7 338.27,0 611.7,-273.43 611.7,-611.7 C 1223.41,273.44 949.98,0 611.71,0 m 0,1186.7 c -317.48,0 -575,-257.52 -575,-575 0,-317.48 257.52,-575 575,-575 317.48,0 575,257.53 575,575 0,317.47 -257.53,575 -575,575 M 848.92,490.07 c -4.65,0 -8.56,0.12 -10.76,0.36 -2.57,4.65 -6.36,10.89 -12,19.58 87.58,0 167.1,7.21 255,23 l -24.83,24 C 976.94,542.94 911,537.32 826.97,537.32 c -12.23,0 -14.8,0 -17.74,0.12 -2.94,4.4 -9.54,13 -16.15,20.92 7.47,-0.49 21.9,-0.74 41.84,-0.74 68.263,-0.0958 136.4197,5.38581 203.79,16.39 l -24.79,24.07 c -53.34,-8.32 -118.53,-13.09 -177,-13.09 -20.79,0 -44.4,0.74 -65.56,2 -4.77,5.5 -17.25,19 -21,23.12 28,-2.94 58.84,-4.28 95.53,-4.28 52.24,0 102.15,3.42 149.36,10.39 l -24.83,23.86 c -36.7005,-4.3472 -73.62296,-6.55426 -110.58,-6.61 -93.09,0 -166.48,20.19 -242.33,66.55 72.3,77.55 190.71,126.6 305.45,126.6 h 10.76 L 893.6,865.4 C 728.1,834.33 553.91,761.55 406.75,661.85 265.16,566.28 215.62,538.02 105.16,489.17 l -0.73,-28.38 74.74,32.05 25.44,-20.18 244,111.8 -15.9,12.72 -125.22,-54.39 -12.36,9.66 65.08,36.33 c 54.92,30.59 96.76,44.29 135.41,44.29 84.53,0 160.37,-59.94 209.3,-165.26 36.82,-4.78 76.08,-7 123.3,-7 96.88,0 191,9.3 297.49,29.24 l -25.93,25.12 c -66.3,-13.82 -179,-25.07 -250.89,-25.07"
+     id="path3747"
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff"
+     sodipodi:nodetypes="csssccsssccccccscccccsccsccccsccccccccccccscsccc" />
+</svg>

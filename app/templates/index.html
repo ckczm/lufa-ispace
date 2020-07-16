@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Lufthansa iSpace{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/index.css')}}">
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-sm bg-dark justify-content-end">
+    <!-- Icon -->
+    <span class="navbar-brand mr-auto">
+        <img src="{{url_for('static', filename='images/lufthansa_logo.svg')}}" class="brand" alt="">
+        <span class="brand">Lufthansa iSpace</span>
+    </span>
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{{url_for('auth.logout')}}"><i class="fas fa-sign-out-alt"></i></span></a>
+        </li>
+    </ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <div class="text-center">
+            <h2 class="header center">Welcome, {{user.name}}!</h2>
+        </div>
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Flight List</h4>
+                    <ul class="nav nav-pills card-header-pills">
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-lg btn-block btn-outline-primary" data-toggle="modal" data-target="#create_flight_modal">Add Flight</button>
+                        </li>
+                        <li class="nav-item">
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <table id="flight_list_table" class="table table-striped table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">Airline</th>
+                                <th scope="col">Flight No.</th>
+                                <th scope="col">DEP</th>
+                                <th scope="col">DEST</th>
+                                <th scope="col">Reg</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for flight in all_flights %}
+                                <tr id="flight_row_{{ flight.flight_no }}">
+                                    <th scope="row">{{flight.airline | upper }}</th>
+                                    <td>{{ flight.flight_no | upper }}</td>
+                                    <td>{{ flight.dep | upper }}</td>
+                                    <td>{{ flight.dest | upper }}</td>
+                                    <td>{{ flight.acft_reg | upper }}</td>
+                                    <td><span class="badge badge-danger">Not Calculated</span></td>
+                                    <td><div class="mt-1 cancel fa fa-times text-danger" data-toggle="modal" data-target="#delete_flight_modal" data-flight={{ flight.flight_no }}></div></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- Modal -->
+                    <div class="modal fade" id="create_flight_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                {% with messages=get_flashed_messages() %}
+                                {% if messages %}
+                                    <div class="alert alert-danger" role="alert" >
+                                        {{ messages[0] }}.
+                                    </div>
+                                {% endif %}
+                                {% endwith %}
+                                <h5 class="modal-title" id="create_flight_title">Create new flight</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form id="create_flight_form" action="{{url_for('main.create_flight')}}" method="POST"> 
+                                <div class="modal-body">
+                                    <div id="response"></div>
+                                    <div class="form-group">
+                                        <label for="airline" class="col-form-label">Airline:</label>
+                                        <input type="text" class="form-control" name="airline" required="" autofocus="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="flight-no" class="col-form-label">Flight No:</label>
+                                        <input id="flight-no-input" type="text" class="form-control" name="flight-no" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="departure" class="col-form-label">Departure:</label>
+                                        <input type="text" class="form-control" name="departure" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="destination" class="col-form-label">Destination:</label>
+                                        <input type="text" class="form-control" name="destination" required="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="registration" class="col-form-label">Registration:</label>
+                                        <input type="text" class="form-control" name="registration" required="">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button id="create_flight_button" type="submit" class="btn btn-primary">Create</button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="delete_flight_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="delete_flight_title">Delete flight</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button id="delete_flight_button" type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+{% endblock %}
