@@ -78,3 +78,29 @@ $(function() {
         modal.find('.modal-title').text('Delete flight ' + flight_no + ' ?')
     });
 })
+
+$(function() {
+    $("#calculate_flight_button").on('click', function(event){
+        event.preventDefault();
+        flight_num = document.getElementById('calculate_flight_title').textContent.split(' ')[2]
+        
+        $.post('/calculate_flight', {
+            flight_no: flight_num
+        })
+
+        var flight_status = 'flight_' + flight_num + '_status';
+        console.log(flight_status)
+        document.getElementById(flight_status).textContent = 'In progress';
+        document.getElementById(flight_status).className = "badge badge-info";
+    });
+})
+
+$(function() {
+    $('#calculate_flight_modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var flight_no = button.data('flight') // Extract info from data-* attributes
+        // Update the modal's content
+        var modal = $(this) 
+        modal.find('.modal-title').text('Calculate flight ' + flight_no)
+    });
+})
