@@ -1,3 +1,4 @@
+import json
 import decimal
 
 from flask import render_template
@@ -28,8 +29,6 @@ def inject_variables():
     # flights_list is a list of dicts, we want them ordered by id to prevent
     # moving flights on frontend layer i.e. after updating (calculating) flight
     sorted_flights = sorted(flights_list, key=itemgetter('id'))
-    print(flights_list[0])
-    print(flights_list[1])
     return {'all_flights': sorted_flights}
 
 @main.app_template_filter('upper')
@@ -111,12 +110,23 @@ def delete_flight():
 @login_required
 def calculate_flight():
     flight_no = request.form['flight_no'].strip('"')
+    etops = json.loads(request.form['etops'])
+    fuel_policy = json.loads(request.form['fuel_policy'])
+
     flight_to_calculate = Flight.query.filter_by(flight_no=f'{flight_no}').first()
 
     flight_to_calculate.status = 'In Progress'
     db.session.commit()
 
-    fibonacci_recursion(35)
+    # simulate calculating flight by calculating sum of first n elements of 
+    # fibonacci sequence in recursion method
+    n = 29
+    if etops:
+        n = 32
+    elif fuel_policy:
+        n = 34
+    elif etops and fuel_policy:
+        n = 35
     print('Flight successfull calculated.')
 
     flight_to_calculate.status = 'Calculated'
