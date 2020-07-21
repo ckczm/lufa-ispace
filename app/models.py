@@ -33,3 +33,4 @@ class Flight(BaseModel):
     dep = Column(String(4))
     dest = Column(String(4))
     acft_reg = Column(String(7))
+    status = Column(String(14), default='Not calculated')

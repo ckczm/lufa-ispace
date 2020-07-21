@@ -35,7 +35,7 @@
                     <h4 class="my-0 font-weight-normal">Flight List</h4>
                     <ul class="nav nav-pills card-header-pills">
                         <li class="nav-item">
-                            <button type="button" class="btn btn-lg btn-block btn-outline-primary" data-toggle="modal" data-target="#create_flight_modal">Add Flight</button>
+                            <button type="button" class="btn btn-lg btn-block btn-light" data-toggle="modal" data-target="#create_flight_modal"><i class="fas fa-plus"></i>Add Flight</button>
                         </li>
                         <li class="nav-item">
                     </ul>
@@ -60,7 +60,8 @@
                                     <td>{{ flight.dep | upper }}</td>
                                     <td>{{ flight.dest | upper }}</td>
                                     <td>{{ flight.acft_reg | upper }}</td>
-                                    <td><span class="badge badge-warning">Not Calculated</span></td>
+                                    <td><span id="flight_{{ flight.flight_no }}_status" class="badge {{ flight.status | check_status}}">{{ flight.status }}</span></td>
+                                    <td><button data-toggle="modal" data-target="#calculate_flight_modal" type="button" class="btn btn-outline-light btn-sm" data-flight={{ flight.flight_no }}>Calculate</button></td>
                                     <td><div class="mt-1 cancel fa fa-times text-danger" data-toggle="modal" data-target="#delete_flight_modal" data-flight={{ flight.flight_no }}></div></td>
                                 </tr>
                             {% endfor %}
@@ -125,6 +126,30 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                 <button id="delete_flight_button" type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="calculate_flight_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="calculate_flight_title">Calculate flight</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="space_etops_checkbox" value="space_etops">
+                                    <label class="form-check-label" for="inlineCheckbox1">Space ETOPS</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="fuel_policy_checkbox" value="fuel_policy">
+                                    <label class="form-check-label" for="inlineCheckbox2">Space Fuel Policy</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button id="calculate_flight_button" type="button" class="btn btn-primary" data-dismiss="modal">Calculate</button>
                             </div>
                         </div>
                         </div>

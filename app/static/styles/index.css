@@ -9,6 +9,12 @@
     cursor: pointer;
 }
 
+.fa-plus {
+    display: inline;
+    font-size: 0.8em;
+    padding-right: 10px;
+}
+
 .header {
     padding: 0.35em;
 }
