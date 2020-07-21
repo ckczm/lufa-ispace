@@ -1,3 +1,10 @@
+$(document).ready(function () {
+    $('#flight_list_table').DataTable({
+        pageLength: 10,
+        lengthMenu: [5, 10, 20]
+    });
+});
+
 $(function () {
     $('#create_flight_button').click(function(event){
         event.preventDefault();
