@@ -83,13 +83,16 @@ $(function() {
     $("#calculate_flight_button").on('click', function(event){
         event.preventDefault();
         flight_num = document.getElementById('calculate_flight_title').textContent.split(' ')[2]
-        
+        space_etops = document.getElementById('space_etops_checkbox').checked
+        fuel_policy = document.getElementById('fuel_policy_checkbox').checked
+
         $.post('/calculate_flight', {
-            flight_no: flight_num
+            flight_no: flight_num,
+            etops: space_etops,
+            fuel_policy: fuel_policy
         })
 
         var flight_status = 'flight_' + flight_num + '_status';
-        console.log(flight_status)
         document.getElementById(flight_status).textContent = 'In progress';
         document.getElementById(flight_status).className = "badge badge-info";
     });
