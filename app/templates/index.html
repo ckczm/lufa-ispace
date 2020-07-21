@@ -120,13 +120,16 @@
                     <div class="modal fade" id="delete_flight_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="delete_flight_title">Delete flight</h5>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button id="delete_flight_button" type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
-                            </div>
+                            <form id="delete_flight_form" action="{{url_for('main.delete_flight')}}" method="POST">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="delete_flight_title">Delete flight</h5>
+                                    <input id='delete_flight_no_input' name="delete_flight_no_input" type="hidden" value="xms">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button id="delete_flight_button" type="submit" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                                </div>
+                            </form>
                         </div>
                         </div>
                     </div>

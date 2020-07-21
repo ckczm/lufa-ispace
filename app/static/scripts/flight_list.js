@@ -58,14 +58,14 @@ $(function () {
 $(function() {
     $("#delete_flight_button").on('click', function(event){
         event.preventDefault();
-        flight_num = document.getElementById('delete_flight_title').textContent.split(' ')[2]
+        flight_num = document.getElementById('delete_flight_no_input').value
 
-        $.post('/delete_flight', {
-            flight_no: flight_num
-        })
-
+        // delete row from flight list
         var row_id = 'flight_row_' + flight_num;
         document.getElementById(row_id).remove();
+
+        // trigger delete flight form
+        document.getElementById('delete_flight_form').submit();
     });
 })
 
@@ -74,8 +74,9 @@ $(function() {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var flight_no = button.data('flight') // Extract info from data-* attributes
         // Update the modal's content
-        var modal = $(this) 
+        var modal = $(this)
         modal.find('.modal-title').text('Delete flight ' + flight_no + ' ?')
+        document.getElementById('delete_flight_no_input').value = flight_no
     });
 })
 
