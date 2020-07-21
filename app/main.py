@@ -127,6 +127,7 @@ def calculate_flight():
         n = 34
     elif etops and fuel_policy:
         n = 35
+    fibonacci_recursion(n)
     print('Flight successfull calculated.')
 
     flight_to_calculate.status = 'Calculated'
