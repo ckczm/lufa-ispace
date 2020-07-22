@@ -1,6 +1,6 @@
 /* custom styling for specific icons */
 .fa-sign-out-alt {
-    font-size: 2em;
+    font-size: 1.5em;
     color: white;
 }
 
@@ -32,6 +32,7 @@ body {
     background-size: cover;
     height: 2000;
     overflow: auto;
+    padding-top: 100px; 
 }
 
 /* #flight_list_table tbody tr {
@@ -49,4 +50,12 @@ body {
 
 .page-link {
     color: black !important;
+}
+
+.navbar-text {
+    color: white;
+}
+
+.logout-text {
+    margin-right: 10px;
 }
