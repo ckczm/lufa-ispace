@@ -121,9 +121,9 @@ def calculate_flight():
     # simulate calculating flight by calculating sum of first n elements of 
     # fibonacci sequence in recursion method
     n = 29
-    if etops:
+    if etops and not fuel_policy:
         n = 32
-    elif fuel_policy:
+    elif fuel_policy and not etops:
         n = 34
     elif etops and fuel_policy:
         n = 35
