@@ -34,3 +34,12 @@ class Flight(BaseModel):
     dest = Column(String(4))
     acft_reg = Column(String(7))
     status = Column(String(14), default='Not calculated')
+
+class Planet(BaseModel):
+    __tablename__ = 'planets'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(10))
+
+    def __repr__(self):
+        return f'Planet {self.id}: {self.name}'

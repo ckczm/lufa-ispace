@@ -10,14 +10,12 @@ $(function () {
         event.preventDefault();
         var airline = document.getElementById('airline_input').value;
         var flight_no = document.getElementById('flight-no-input').value;
-        var departure = document.getElementById('departure_input').value;
-        var destination = document.getElementById('destination_input').value;
         var registration = document.getElementById('registration_input').value;
 
         var url = '/get_flight/' + flight_no;
         $.getJSON(url, function(data){
             if(data == null){
-                if(airline !== '' && departure !== '' && destination !== '' && registration !== ''){
+                if(airline !== '' && registration !== ''){
                     document.getElementById('create_flight_form').submit();
                 }
                 else{
@@ -45,7 +43,7 @@ $(function () {
                 }, 300);
                 $('<div class="alert alert-danger">' +
                     '<button type="button" class="close" data-dismiss="alert">' +
-                    '&times;</button>Flight already exist! Set new flight' + 
+                    '&times;</button>Flight already exist! Set new flight ' + 
                     'number.</div>').hide().appendTo('#response').fadeIn(1000);
 
                 $(".alert").delay(3000).fadeOut(
@@ -58,8 +56,27 @@ $(function () {
                     height: '-=72px'
                 }, 300);
             }
+        }).fail(function(){
+            $("#response").animate({
+                height: '+=72px'
+            }, 300);
+            $('<div class="alert alert-danger">' +
+                '<button type="button" class="close" data-dismiss="alert">' +
+                '&times;</button>Set flight number.' + 
+                '</div>').hide().appendTo('#response').fadeIn(1000);
+
+            $(".alert").delay(3000).fadeOut(
+                "normal",
+                function(){
+                    $(this).remove();
+            });
+
+            $("#response").delay(4000).animate({
+                height: '-=72px'
+            }, 300);
         });
-    })
+        $(this).blur();
+    });
 })
 
 $(function() {

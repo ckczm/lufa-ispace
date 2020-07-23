@@ -37,7 +37,7 @@
                     <h4 class="my-0 font-weight-normal">Flight List</h4>
                     <ul class="nav nav-pills card-header-pills">
                         <li class="nav-item">
-                            <button type="button" class="btn btn-lg btn-block btn-light" data-toggle="modal" data-target="#create_flight_modal"><i class="fas fa-plus"></i>Add Flight</button>
+                            <button id="add_flight_button "type="button" class="btn btn-lg btn-block btn-light" data-toggle="modal" data-target="#create_flight_modal"><i class="fas fa-plus"></i>Add Flight</button>
                         </li>
                         <li class="nav-item">
                     </ul>
@@ -95,19 +95,27 @@
                                     <div id="response"></div>
                                     <div class="form-group">
                                         <label for="airline" class="col-form-label">Airline:</label>
-                                        <input id="airline_input" type="text" class="form-control" name="airline" required autofocus="">
+                                        <input id="airline_input" type="text" class="form-control" name="airline" autofocus="" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="flight-no" class="col-form-label">Flight No:</label>
                                         <input id="flight-no-input" type="text" class="form-control" name="flight-no" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="departure" class="col-form-label">Departure:</label>
-                                        <input id="departure_input" type="text" class="form-control" name="departure" required>
+                                        <label for="exampleFormControlSelect1">Departure</label>
+                                        <select class="form-control" id="departure_planet" name="departure">
+                                            {% for planet in planets %}
+                                                <option>{{planet.name}}</option>
+                                            {% endfor %}
+                                        </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="destination" class="col-form-label">Destination:</label>
-                                        <input id="destination_input" type="text" class="form-control" name="destination" required>
+                                        <label for="exampleFormControlSelect1">Destination</label>
+                                        <select class="form-control" id="destination_planet" name="destination">
+                                            {% for planet in planets %}
+                                                <option>{{planet.name}}</option>
+                                            {% endfor %}
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="registration" class="col-form-label">Registration:</label>

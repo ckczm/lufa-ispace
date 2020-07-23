@@ -59,3 +59,8 @@ body {
 .logout-text {
     margin-right: 10px;
 }
+
+.btn:focus, .btn-light:focus, .btn.light:focus, .btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+}

@@ -18,6 +18,7 @@ from app import db
 from app import models
 from .models import User
 from .models import Flight
+from .models import Planet
 
 
 main = Blueprint('main', __name__)
@@ -29,7 +30,12 @@ def inject_variables():
     # flights_list is a list of dicts, we want them ordered by id to prevent
     # moving flights on frontend layer i.e. after updating (calculating) flight
     sorted_flights = sorted(flights_list, key=itemgetter('id'))
-    return {'all_flights': sorted_flights}
+
+    planets_from_db = Planet.query.all()
+    planets_list = [planet.__dict__ for planet in planets_from_db]
+    sorted_planets = sorted(planets_list, key=itemgetter('id'))
+
+    return {'all_flights': sorted_flights, 'planets': sorted_planets}
 
 @main.app_template_filter('upper')
 def utility_processor(word: str) -> str:
