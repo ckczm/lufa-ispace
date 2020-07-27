@@ -1,38 +1,9 @@
-/* custom styling for specific icons */
-.fa-sign-out-alt {
-    font-size: 1.5em;
-    color: white;
-}
-
-.fa-times {
-    font-size: 1.4em;
-    cursor: pointer;
-}
-
-.fa-plus {
-    display: inline;
-    font-size: 0.8em;
-    padding-right: 10px;
-}
-
-.header {
-    padding: 0.35em;
-}
-
-.brand {
-    display: inline-block;
-    color: white;
-    height: 30px;
-    width: 30px;
-}
-
 body {
     background-image: url("../images/space-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 2000;
     overflow: auto;
-    padding-top: 100px; 
 }
 
 /* #flight_list_table tbody tr {
@@ -50,14 +21,6 @@ body {
 
 .page-link {
     color: black !important;
-}
-
-.navbar-text {
-    color: white;
-}
-
-.logout-text {
-    margin-right: 10px;
 }
 
 .btn:focus, .btn-light:focus, .btn.light:focus, .btn:active {
