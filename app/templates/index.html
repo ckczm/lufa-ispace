@@ -5,27 +5,7 @@
 {% block head %}
 {{ super() }}
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/index.css')}}">
-{% endblock %}
-
-{% block navbar %}
-<nav class="navbar fixed-top navbar-expand-sm bg-dark justify-content-end">
-    <!-- Icon -->
-    <span class="navbar-brand mr-auto">
-        <img src="{{url_for('static', filename='images/lufthansa_logo.svg')}}" class="brand" alt="">
-        <span class="brand">Lufthansa iSpace</span>
-    </span>
-    <!-- Links -->
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <span class="navbar-text logout-text">{{user.name}}</span>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{url_for('auth.logout')}}">
-                <i class="fa fa-sign-out-alt"></i>
-            </a>
-        </li>
-    </ul>
-</nav>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/base.css')}}">
 {% endblock %}
 
 {% block content %}
