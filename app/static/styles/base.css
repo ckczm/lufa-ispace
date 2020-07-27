@@ -1,0 +1,46 @@
+body {
+    padding-top: 100px;
+}
+/* custom styling for specific icons */
+.fa-sign-out-alt {
+    font-size: 1.5em;
+    color: white;
+}
+
+.fa-times {
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
+.fa-plus {
+    display: inline;
+    font-size: 0.8em;
+    padding-right: 10px;
+}
+
+.header {
+    padding: 0.35em;
+}
+
+.brand {
+    display: inline-block;
+    color: white;
+    height: 30px;
+    width: 30px;
+}
+
+.ispace-title {
+    color: white;
+}
+
+.navbar-text, .nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: rgb(2, 134, 223);
+}
+
+.logout-text {
+    margin-right: 10px;
+}
