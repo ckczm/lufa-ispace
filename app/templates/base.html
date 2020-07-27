@@ -30,6 +30,32 @@
 
 <body>
     {% block navbar %}
+    <nav class="navbar fixed-top navbar-expand-sm bg-dark">
+        <!-- Icon -->
+        <div class="navbar-brand">
+            <img src="{{url_for('static', filename='images/lufthansa_logo.svg')}}" class="brand" alt="">
+            <span class="ispace-title">Lufthansa iSpace</span>
+        </div>
+        <!-- Links -->
+        <ul class="nav navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{url_for('main.index')}}">Flights</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url_for('main.map')}}">Map</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item">
+                <span class="navbar-text logout-text">{{user.name}}</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{url_for('auth.logout')}}">
+                    <i class="fa fa-sign-out-alt"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
     {% endblock %}
     {% block content %}
     {% endblock %}
