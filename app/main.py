@@ -58,6 +58,10 @@ def check_status_return_badge_class(flight_status: str) -> str:
 def index():
     return render_template('index.html', user=current_user)
 
+@main.route('/map')
+@login_required
+def map():
+    return render_template('map.html', user=current_user)
 
 @main.route('/create_flight', methods=['POST'])
 @login_required
