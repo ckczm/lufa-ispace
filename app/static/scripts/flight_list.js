@@ -12,72 +12,64 @@ $(function () {
         var flight_no = document.getElementById('flight-no-input').value;
         var registration = document.getElementById('registration_input').value;
 
-        var url = '/get_flight/' + flight_no;
-        $.getJSON(url, function(data){
-            if(data == null){
-                if(airline !== '' && registration !== ''){
-                    document.getElementById('create_flight_form').submit();
-                }
-                else{
-                    $("#response").animate({
-                        height: '+=72px'
-                    }, 300);
-                    $('<div class="alert alert-danger">' +
-                        '<button type="button" class="close" data-dismiss="alert">' +
-                        '&times;</button>Enter all data!</div>').hide().appendTo('#response').fadeIn(1000);
-    
-                    $(".alert").delay(3000).fadeOut(
-                        "normal",
-                        function(){
-                            $(this).remove();
-                    });
-    
-                    $("#response").delay(4000).animate({
-                        height: '-=72px'
-                    }, 300);
-                }
+        if(flight_no !== ''){
+            if(flight_no.length > 8){
+                display_alert('The allowed Flight Number max. length is 8!')
             }
             else{
-                $("#response").animate({
-                    height: '+=72px'
-                }, 300);
-                $('<div class="alert alert-danger">' +
-                    '<button type="button" class="close" data-dismiss="alert">' +
-                    '&times;</button>Flight already exist! Set new flight ' + 
-                    'number.</div>').hide().appendTo('#response').fadeIn(1000);
-
-                $(".alert").delay(3000).fadeOut(
-                    "normal",
-                    function(){
-                        $(this).remove();
+                var url = '/get_flight/' + flight_no;
+                $.getJSON(url, function(data){
+                    if(data == null){
+                        if(airline !== '' && registration !== ''){
+                            if(airline.length <= 6){
+                                if(registration.length <= 8){
+                                    document.getElementById('create_flight_form').submit();
+                                }
+                                else{
+                                    display_alert('The allowed Registration max. length is 8!')
+                                }
+                            }
+                            else{
+                                display_alert('The allowed Airline max. length is 6!')
+                            }
+                        }
+                        else{
+                            display_alert('Enter all data!')
+                        }
+                    }
+                    else{
+                        display_alert('Flight already exist! Set new flight number.')
+                    }
+                }).fail(function(){
+                    display_alert('Set flight number.');
                 });
-
-                $("#response").delay(4000).animate({
-                    height: '-=72px'
-                }, 300);
+                $(this).blur();
             }
-        }).fail(function(){
-            $("#response").animate({
-                height: '+=72px'
-            }, 300);
-            $('<div class="alert alert-danger">' +
-                '<button type="button" class="close" data-dismiss="alert">' +
-                '&times;</button>Set flight number.' + 
-                '</div>').hide().appendTo('#response').fadeIn(1000);
-
-            $(".alert").delay(3000).fadeOut(
-                "normal",
-                function(){
-                    $(this).remove();
-            });
-
-            $("#response").delay(4000).animate({
-                height: '-=72px'
-            }, 300);
-        });
-        $(this).blur();
+        }
+        else{
+            display_alert('Set flight number.');
+        }
     });
 })
+
+function display_alert(msg) {
+    $("#response").animate({
+        height: '+=72px'
+    }, 300);
+    $('<div class="alert alert-danger">' +
+        '<button type="button" class="close" data-dismiss="alert">' +
+        '&times;</button>' + msg + '</div>').hide().appendTo('#response').fadeIn(1000);
+
+    $(".alert").delay(3000).fadeOut(
+        "normal",
+        function(){
+            $(this).remove();
+    });
+
+    $("#response").delay(4000).animate({
+        height: '-=72px'
+    }, 300);
+}
 
 $(function() {
     $("#delete_flight_button").on('click', function(event){

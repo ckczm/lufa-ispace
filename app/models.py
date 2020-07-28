@@ -28,11 +28,11 @@ class Flight(BaseModel):
     __tablename__ = 'flights'
 
     id = Column(Integer, primary_key=True)
-    airline = Column(String(3))
-    flight_no = Column(String(7))
-    dep = Column(String(4))
-    dest = Column(String(4))
-    acft_reg = Column(String(7))
+    airline = Column(String(6))
+    flight_no = Column(String(8))
+    dep = Column(String(10))
+    dest = Column(String(10))
+    acft_reg = Column(String(8))
     status = Column(String(14), default='Not calculated')
 
 class Planet(BaseModel):
