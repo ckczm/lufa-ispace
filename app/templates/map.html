@@ -10,7 +10,7 @@
 
 {% block content %}
 <body class="opening hide-UI view-2D zoom-large data-close controls-close">
-    <div id="navbar">
+    <div id="navbar-planets">
         <a id="toggle-data" href="#data"><i class="icon-data"></i>Data</a>
         <a id="toggle-controls" href="#controls"><i class="icon-controls"></i>Controls</a>
     </div>
@@ -26,24 +26,18 @@
         <a class="neptune" title="neptune" href="#neptunespeed">Neptune</a>
     </div>
     <div id="controls">
+        <label></label>
+        <label></label>
         <label>
-            <div></div>
-            <!-- <input type="checkbox"> -->
-        </label>
-        <label>
-            <div></div>
-            <!-- <input type="checkbox"> -->
-        </label>
-        <label>
-            <input type="radio" class="set-speed" name="scale" checked>
+            <input type="radio" class="form-check-input set-speed" name="scale" checked>
             <span>Speed</span>
         </label>
         <label>
-            <input type="radio" class="set-size" name="scale">
+            <input type="radio" class="form-check-input set-size" name="scale">
             <span>Size</span>
         </label>
         <label>
-            <input type="radio" class="set-distance" name="scale">
+            <input type="radio" class="form-check-input set-distance" name="scale">
             <span>Distance</span>
         </label>
         </div>
