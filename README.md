@@ -16,7 +16,10 @@
 - Exploratory testing
 
 > Screenshots:
-![Alt text](/media/login_page.png?raw=true "Optional Title")
+![Login Page](/media/login_page.jpg?raw=true "Login Page")
+![Flight List](/media/flight_list.jpg?raw=true "Flight List")
+![Solar System Map](/media/map_page.jpg?raw=true "Solar System Map")
+
 ## How to use it
 
 ```bash
