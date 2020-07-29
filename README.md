@@ -15,6 +15,8 @@
 - API testing
 - Exploratory testing
 
+>Thanks to branches with various intentionally implemented errors, this application offers many different test scenarios that can be used in training by easily switching between prepared branches. To create your own version of the application with a new defined bug, just create your branch based on the master one and implement it.
+
 > Screenshots:
 
 ![Login Page](/media/login_page.jpg?raw=true "Login Page")
