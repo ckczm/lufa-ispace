@@ -16,7 +16,7 @@
 - Exploratory testing
 
 > Screenshots:
-
+![Alt text](/media/login_page.png?raw=true "Optional Title")
 ## How to use it
 
 ```bash
