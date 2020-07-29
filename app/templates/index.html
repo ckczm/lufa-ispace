@@ -48,7 +48,7 @@
                                     <td>{{ flight.acft_reg | upper }}</td>
                                     <td><span id="flight_{{ flight.flight_no }}_status" class="badge {{ flight.status | check_status}}">{{ flight.status }}</span></td>
                                     <td><button data-toggle="modal" data-target="#calculate_flight_modal" type="button" class="btn btn-outline-light btn-sm" data-flight={{ flight.flight_no }}>Calculate</button></td>
-                                    <td><div class="mt-1 cancel fa fa-times text-danger" data-toggle="modal" data-target="#delete_flight_modal" data-flight={{ flight.flight_no }}></div></td>
+                                    <td><div class="mt-1 cancel fa fa-times text-info" data-toggle="modal" data-target="#delete_flight_modal" data-flight={{ flight.flight_no }}></div></td>
                                 </tr>
                             {% endfor %}
                         </tbody>
