@@ -39,22 +39,10 @@ $ # 2. Go to project directory
 $ cd lufthansa-ispace
 $
 $ # 3. Launch application via docker-compose
-$ docker-compose
+$ docker-compose up -d
 $
-$ # Activate python virtual environment
-$ # Unix based system:
-$ . env/bin/activate
+$ # 4. Done! Application is available at http://http://localhost:5000
 $
-$ # Windows:
-$ .\env\Scripts\activate
-$
-$ # Install project packages
-$ pip install -r requirements.txt --user
-$
-$ # Run application
-$ python run.py
-
-
 ```
 <br />
 
