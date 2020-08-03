@@ -33,15 +33,24 @@ $ # - installed git
 $ # - installed docker and docker-compose
 $
 $ # 1. Get the app
-$ git clone
+$ git clone https://U552249@bitbucket.dev.lsy.pl/scm/~u552249/lufthansa-ispace.git
 $ 
 $ # 2. Go to project directory
 $ cd lufthansa-ispace
 $
-$ # 3. Launch application via docker-compose
+$ # 3. Build docker image of the application
+$ docker build -t ispace_web_server . (trza wylaczyc firmowego neta)
+$
+$ # 4. Pull official postgres database image
+$ git pull postgres
+$
+$ # 5. Create docker network
+$ docker network create ispace_network
+$
+$ # 6. Launch application via docker-compose 
 $ docker-compose up -d
 $
-$ # 4. Done! Application is available at http://http://localhost:5000
+$ # 7. Done! Application is available at http://localhost:5000
 $
 ```
 <br />
