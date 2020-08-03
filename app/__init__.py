@@ -10,7 +10,7 @@ bootstrap = Bootstrap(app)
 cfg = {
     'user': 'postgres',
     'dbname': 'postgres',
-    'host': '0.0.0.0',
+    'host': 'ispace_database',
     'port': '5432',
     'password': 'airbus87_'
 }
