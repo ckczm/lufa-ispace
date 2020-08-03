@@ -1,0 +1,26 @@
+version: '3.6'
+services:
+  ispace_web_server:
+    container_name: ispace_web_server
+    image: ispace_web_server:latest
+    restart: always
+    ports:
+      - "5000:5000"
+    networks:
+      - ispace_network
+  ispace_database:
+    container_name: ispace_database
+    image: ispace_database_image:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 'airbus87_'
+    volumes:
+      - $HOME/docker/volumes/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - ispace_network
+networks:
+  ispace_network:
+    driver: bridge
+    external: true
