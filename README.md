@@ -89,6 +89,8 @@ The project is coded using blueprints, app factory pattern, dual configuration p
    |    |-- main.py                              # Main Blueprint - core backend functionalities for flight list
    |    |-- models.py                            # Database models - SQLAlchemy
    |
+   |-- docker/                                   # Store docker-compose file
+   |-- Dockerfile                                # Dockerfile for building ispace app docker image
    |-- media/                                    # Store app screenshots for readme file
    |-- requirements.txt                          # Python required packages
    |-- .env                                      # Inject Configuration via Environment
