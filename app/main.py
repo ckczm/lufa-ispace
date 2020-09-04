@@ -35,7 +35,7 @@ def inject_variables():
     planets_list = [planet.__dict__ for planet in planets_from_db]
     sorted_planets = sorted(planets_list, key=itemgetter('id'))
 
-    return {'all_flights': sorted_flights, 'planets': sorted_planets}
+    return {'user': current_user, 'all_flights': sorted_flights, 'planets': sorted_planets}
 
 @main.app_template_filter('upper')
 def utility_processor(word: str) -> str:
@@ -56,12 +56,12 @@ def check_status_return_badge_class(flight_status: str) -> str:
 @main.route('/index')
 @login_required
 def index():
-    return render_template('index.html', user=current_user)
+    return render_template('index.html')
 
 @main.route('/map')
 @login_required
 def map():
-    return render_template('map.html', user=current_user)
+    return render_template('map.html')
 
 @main.route('/create_flight', methods=['POST'])
 @login_required
@@ -91,7 +91,7 @@ def create_flight():
     db.session.add(new_flight)
     db.session.commit()
 
-    return redirect(url_for('main.index', user=current_user))
+    return redirect(url_for('main.index'))
 
 @main.route('/get_flight/<flight_number>', methods=['GET'])
 @login_required
@@ -105,7 +105,7 @@ def get_flight(flight_number):
     else:
         return jsonify(None)
 
-@main.route('/delete_flight', methods=['POST'])
+@main.route('/delete_flight', methods=['POST', 'DELETE'])
 @login_required
 def delete_flight():
     flight_no = request.form['flight_no'].strip('"')
@@ -114,7 +114,7 @@ def delete_flight():
     db.session.delete(flight_to_delete)
     db.session.commit()
 
-    return redirect(url_for('main.index', user=current_user))
+    return jsonify(None)
 
 @main.route('/calculate_flight', methods=['POST'])
 @login_required
@@ -138,12 +138,11 @@ def calculate_flight():
     elif etops and fuel_policy:
         n = 35
     fibonacci_recursion(n)
-    print('Flight successfull calculated.')
 
     flight_to_calculate.status = 'Calculated'
     db.session.commit()
 
-    return redirect(url_for('main.index', user=current_user))
+    return redirect(url_for('main.index'))
 
 def fibonacci_recursion(n):
     if n == 0: return 0
