@@ -8,8 +8,12 @@ from flask import url_for
 from flask import request
 from flask import flash
 from flask import jsonify
+from flask import make_response
+from flask import request
 from flask_login import login_required
 from flask_login import current_user
+
+from functools import wraps
 
 from operator import itemgetter
 
@@ -46,7 +50,7 @@ def check_status_return_badge_class(flight_status: str) -> str:
     """Method that check current flight status and return proper Bootstrap 
     badge class ('info' for In Progress, 'light' for ' Calculated' flight) 
     for flight status span element."""
-    if flight_status == 'In Progress':
+    if flight_status == 'In progress':
         return 'badge-info'
     elif flight_status == 'Not calculated':
         return 'badge-warning'
@@ -58,27 +62,34 @@ def check_status_return_badge_class(flight_status: str) -> str:
 def index():
     return render_template('index.html')
 
+
 @main.route('/map')
 @login_required
 def map():
     return render_template('map.html')
 
+
 @main.route('/create_flight', methods=['POST'])
-@login_required
 def create_flight():
+    app.logger.info('Start creating flight')
+    if not current_user.is_authenticated:
+        return unauthorized_user_response()
+
     airline = request.form.get('airline')
     flight_no = request.form.get('flight-no')
     dep = request.form.get('departure')
     dest = request.form.get('destination')
     acft_reg = request.form.get('registration')
 
-    # check if flight is currently in database
     flight = Flight.query.filter_by(flight_no=flight_no).first()
-
-    # if flight already exist, redirect back to main page
     if flight:
-        flash('Flight already exists!')
-        return redirect(url_for('main.index'))
+        data = {
+            'message': f'Flight {flight_no} already exist!',
+            'status_code': 409
+        }
+        response = make_response(data, 409)
+        response.headers['Message'] = f'Flight {flight_no} already exist!'
+        return response
 
     # create new flight
     new_flight = Flight(
@@ -91,13 +102,17 @@ def create_flight():
     db.session.add(new_flight)
     db.session.commit()
 
-    return redirect(url_for('main.index'))
+    response = make_response(render_template('index.html'), 201)
+    response.headers['Message'] = f'Flight {flight_no} created.'
+    return response
+
 
 @main.route('/get_flight/<flight_number>', methods=['GET'])
-@login_required
 def get_flight(flight_number):
-    flight = Flight.query.filter_by(flight_no=f'{flight_number}').first()
+    if not current_user.is_authenticated:
+        return unauthorized_user_response()
 
+    flight = Flight.query.filter_by(flight_no=f'{flight_number}').first()
     if flight is not None:
         flight_data_dict = flight.__dict__
         del flight_data_dict['_sa_instance_state']
@@ -105,11 +120,17 @@ def get_flight(flight_number):
     else:
         return jsonify(None)
 
+
 @main.route('/delete_flight', methods=['POST', 'DELETE'])
-@login_required
 def delete_flight():
+    if not current_user.is_authenticated:
+        return unauthorized_user_response()
+
     flight_no = request.form['flight_no'].strip('"')
     flight_to_delete = Flight.query.filter_by(flight_no=f'{flight_no}').first()
+
+    if not flight_to_delete:
+        return no_flight_response(flight_to_delete)
     
     db.session.delete(flight_to_delete)
     db.session.commit()
@@ -117,13 +138,18 @@ def delete_flight():
     return jsonify(None)
 
 @main.route('/calculate_flight', methods=['POST'])
-@login_required
 def calculate_flight():
+    if not current_user.is_authenticated:
+        return unauthorized_user_response()
+
     flight_no = request.form['flight_no'].strip('"')
     etops = json.loads(request.form['etops'])
     fuel_policy = json.loads(request.form['fuel_policy'])
 
     flight_to_calculate = Flight.query.filter_by(flight_no=f'{flight_no}').first()
+
+    if not flight_to_calculate:
+        return no_flight_response(flight_to_calculate)
 
     flight_to_calculate.status = 'In Progress'
     db.session.commit()
@@ -132,20 +158,45 @@ def calculate_flight():
     # fibonacci sequence in recursion method
     n = 29
     if etops and not fuel_policy:
-        n = 32
+        n = 31
     elif fuel_policy and not etops:
-        n = 34
+        n = 32
     elif etops and fuel_policy:
-        n = 35
+        n = 33
     fibonacci_recursion(n)
 
     flight_to_calculate.status = 'Calculated'
     db.session.commit()
 
-    return redirect(url_for('main.index'))
+    response = make_response(render_template('index.html'), 201)
+    response.headers['Message'] = f'Flight {flight_no} calculated.'
+    return response
+
+def no_flight_response(flight_number: str):
+    data = {
+        'message': f'Flight {flight_number} doesn`t exist!',
+        'status_code': 404
+    }
+    response = make_response(data, 404)
+    response.headers['Message'] = f'Flight {flight_number} doesn`t exist!'
+    return response
+
+def unauthorized_user_response():
+    data = {'message': f'Unauthorized user!', 'status_code': 401}
+    response = make_response(data, 401)
+    response.headers['Message'] = f'Unauthorized user!'
+    return response
 
 def fibonacci_recursion(n):
     if n == 0: return 0
     if n == 1: return 1
     
     return fibonacci_recursion(n-2) + fibonacci_recursion(n-1)
+
+# @app.after_request
+# def redirect_to_index(response):
+#     app.logger.info(request.url_rule.endpoint)
+#     if request.url_rule.endpoint == 'main.create_flight':
+#         app.logger.info('bylem tu?')
+#         redirect(url_for('main.index'))
+#     return response
