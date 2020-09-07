@@ -4,16 +4,37 @@ from flask import redirect
 from flask import url_for
 from flask import request
 from flask import flash
+from flask import make_response
 from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
+from flask_login import current_user
+
+from operator import itemgetter
+
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 
 from app import db
 from .models import User
+from .models import Flight
+from .models import Planet
 
 auth = Blueprint('auth', __name__)
+
+@auth.context_processor
+def inject_variables():
+    flights_from_db = Flight.query.all()
+    flights_list = [flight.__dict__ for flight in flights_from_db]
+    # flights_list is a list of dicts, we want them ordered by id to prevent
+    # moving flights on frontend layer i.e. after updating (calculating) flight
+    sorted_flights = sorted(flights_list, key=itemgetter('id'))
+
+    planets_from_db = Planet.query.all()
+    planets_list = [planet.__dict__ for planet in planets_from_db]
+    sorted_planets = sorted(planets_list, key=itemgetter('id'))
+
+    return {'user': current_user, 'all_flights': sorted_flights, 'planets': sorted_planets}
 
 @auth.route('/')
 @auth.route('/login')
@@ -37,10 +58,16 @@ def login_post():
     # and compare to hashed password stored in database
     if not user or not check_password_hash(user.password, password):
         flash('Incorrect email or password.')
-        return redirect(url_for('auth.login_page'))
+        response = make_response(render_template('login.html'), 401)
+        response.headers['Mmessage'] = 'Incorrect email or password.'
+        return response
 
     login_user(user, remember=remember)
-    return redirect(url_for('main.index'))
+
+    response = make_response(render_template('index.html'), 200)
+    response.headers['Message'] = f'User {user.email} has been logged in.'
+
+    return response
 
 @auth.route('/signup', methods=['POST'])
 def signup_post():
@@ -48,15 +75,13 @@ def signup_post():
     name = request.form.get('name')
     password = request.form.get('password')
 
-    # check if user already exists in database
     user = User.query.filter_by(email=email).first()
-
-    # if user already exists, redirect back to signup page
     if user:
         flash('User already exists!')
-        return redirect(url_for('auth.signup_page'))
+        response = make_response(render_template('signup.html'), 409)
+        response.headers['Message'] = 'User already exists!'
+        return response
     
-    # create new user with 0 assets value as a default
     new_user = User(
         email=email,
         name=name,
@@ -66,7 +91,10 @@ def signup_post():
     db.session.add(new_user)
     db.session.commit()
 
-    return redirect(url_for('auth.login_page'))
+    response = make_response(render_template('login.html'), 201)
+    response.headers['Message'] = f'New user {new_user.email} created!'
+
+    return response
 
 @auth.route('/logout')
 @login_required # prevent logout user who isn`t logged in
