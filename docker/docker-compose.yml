@@ -2,7 +2,7 @@ version: '3.6'
 services:
   ispace_web_server:
     container_name: ispace_web_server
-    image: ispace_web_server:latest
+    image: ckczm/lufa-ispace:latest
     restart: always
     ports:
       - "5000:5000"
@@ -10,7 +10,7 @@ services:
       - ispace_network
   ispace_database:
     container_name: ispace_database
-    image: ispace_database_image:latest
+    image: ckczm/ispace_database_image:latest
     restart: always
     environment:
       POSTGRES_PASSWORD: 'airbus87_'
