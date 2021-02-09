@@ -39,10 +39,10 @@ $ # 2. Go to project directory
 $ cd lufthansa-ispace
 $
 $ # 3. Build docker image of the application
-$ docker build -t ispace_web_server . (trza wylaczyc firmowego neta)
+$ docker build -t ispace_web_server .
 $
 $ # 4. Pull official postgres database image
-$ git pull postgres
+$ docker pull postgres
 $
 $ # 5. Create docker network
 $ docker network create ispace_network
