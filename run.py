@@ -1,6 +1,8 @@
+from waitress import serve
+
 from app import create_app, db
 from app.models import User, Flight, Planet
-from waitress import serve
+
 
 app = create_app()
 
