@@ -15,7 +15,7 @@ services:
     environment:
       POSTGRES_PASSWORD: 'airbus87_'
     volumes:
-      - $HOME/docker/volumes/postgres:/var/lib/postgresql/data
+      - /var/lib/docker/volumes/postgres:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
