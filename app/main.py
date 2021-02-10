@@ -13,7 +13,6 @@ from flask_login import current_user
 
 from operator import itemgetter
 
-from app import app
 from app import db
 from app import models
 from .models import User
