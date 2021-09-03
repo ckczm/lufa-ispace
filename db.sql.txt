@@ -1,0 +1,16 @@
+create table users (id serial primary key not null, email varchar(150) unique not null, name varchar(75) not null, surname varchar(75), password varchar(100) not null);
+
+
+create table planets (id serial primary key not null, name varchar(10) unique not null);
+
+
+insert into planets (name) values ('Mercury');
+insert into planets (name) values ('Venus');
+insert into planets (name) values ('Earth');
+insert into planets (name) values ('Mars');
+insert into planets (name) values ('Jupiter');
+insert into planets (name) values ('Saturn');
+insert into planets (name) values ('Uranus');
+insert into planets (name) values ('Neptune');
+
+create table flights (id serial primary key not null, airline varchar(6) not null, flight_no varchar(8) not null, dep varchar(10) not null, dest varchar(10) not null, acft_reg varchar(8) not null, status varchar(14) not null default 'Not calculated' check (status = any ('{Not calculated, Calculated, In Progress}'::text[])));
